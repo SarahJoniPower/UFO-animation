@@ -5,7 +5,7 @@ const ctx = canvas.getContext("2d");
 // top of UFO 
 ctx.beginPath();
 ctx.moveTo(200, 200)
-ctx.quadraticCurveTo(290, 55, 400, 200);
+ctx.quadraticCurveTo(270, 100, 350, 200);
 ctx.closePath();
 ctx.lineWidth = 5;
 ctx.strokeStyle = 'pink'
@@ -15,12 +15,12 @@ ctx.stroke();
 
 // Bottom of UFO
 ctx.beginPath();
-ctx.moveTo(400, 200)
-ctx.lineTo(500, 260);
+ctx.moveTo(350, 200)
+ctx.lineTo(420, 240);
 ctx.moveTo(200, 200)
-ctx.lineTo(90, 260);
-ctx.moveTo(90, 260)
-ctx.lineTo(500, 260);
+ctx.lineTo(130, 240);
+ctx.moveTo(130, 240)
+ctx.lineTo(420, 240);
 ctx.closePath();
 ctx.lineWidth = 5;
 ctx.strokeStyle = 'pink'
@@ -29,13 +29,13 @@ ctx.stroke();
 // Antenna
 ctx.beginPath();
 ctx.moveTo(200, 200)
-ctx.lineTo(150, 150);
-ctx.moveTo(400, 200)
-ctx.lineTo(450, 150);
-ctx.moveTo(450, 150)
-ctx.arc(450, 150, 4, 0, 2 * Math.PI)
-ctx.moveTo(150, 150)
-ctx.arc(150, 150, 4, 0, 2 * Math.PI)
+ctx.lineTo(150, 170);
+ctx.moveTo(350, 200)
+ctx.lineTo(400, 170);
+ctx.moveTo(400, 170)
+ctx.arc(400, 170, 4, 0, 2 * Math.PI)
+ctx.moveTo(150, 170)
+ctx.arc(150, 170, 4, 0, 2 * Math.PI)
 ctx.closePath();
 ctx.lineWidth = 2;
 ctx.strokeStyle = 'orange'
@@ -43,9 +43,9 @@ ctx.fillStyle = 'orange'
 ctx.fill()
 ctx.stroke();
 
-// blue Antenna 
+// blue Antenna circle
 ctx.beginPath();
-ctx.arc(450, 150, 4, 0, 2 * Math.PI)
+ctx.arc(400, 170, 4, 0, 2 * Math.PI)
 ctx.closePath();
 ctx.lineWidth = 2;
 ctx.strokeStyle = 'blue'
@@ -65,11 +65,11 @@ ctx.fill()
 ctx.stroke();
 }
 
-xAxis = 120
+xAxis = 165
 colour = 'blue'
 
-while (xAxis <= 465) {
-  createBodyCircle( xAxis, 250, 'orange', colour)
+while (xAxis <= 400) {
+  createBodyCircle( xAxis, 231, 'orange', colour)
   xAxis += 15
 
   if (colour === 'blue') {
@@ -80,4 +80,3 @@ while (xAxis <= 465) {
   }
 } 
 
-createBodyCircle( 478, 250, 'orange', 'blue')
