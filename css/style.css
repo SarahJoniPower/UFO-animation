@@ -1,4 +1,8 @@
 body{
-    background-color: rgb(192, 80, 15);
+    background-color: rgb(192, 80, 15);    
+  }
+
+  #ufo-canvas {
+    background: rgb(71, 71, 218)
   }
   
