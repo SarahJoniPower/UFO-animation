@@ -1,0 +1,33 @@
+{
+  "name": "animation-challenge",
+  "version": "1.0.0",
+  "description": "An animation of a UFO landing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SarahJoniPower/UFO-animation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SarahJoniPower/UFO-animation/issues"
+  },
+  "homepage": "https://github.com/SarahJoniPower/UFO-animation#readme",
+  "dependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "webpack-cli": "^4.5.0"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.27.1",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
