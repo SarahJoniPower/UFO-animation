@@ -1,14 +1,18 @@
 import React, { useRef, useEffect } from "react"
-export const UFO = () => {
+export const UFO = (props) => {
   const canvasRef = useRef(null)
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
 
+    // UFO 
+    let xAxis = props.xAxis
+    let yAxis = props.yAxis
+
     // top of UFO 
     ctx.beginPath();
-    ctx.moveTo(200, 200)
-    ctx.quadraticCurveTo(270, 100, 350, 200);
+    ctx.moveTo(xAxis, yAxis)
+    ctx.quadraticCurveTo(xAxis + 70, yAxis - 100, xAxis + 150, yAxis);
     ctx.closePath();
     ctx.lineWidth = 5;
     ctx.strokeStyle = 'pink'
@@ -18,12 +22,12 @@ export const UFO = () => {
 
     // Bottom of UFO
     ctx.beginPath();
-    ctx.moveTo(350, 200)
-    ctx.lineTo(420, 240);
-    ctx.moveTo(200, 200)
-    ctx.lineTo(130, 240);
-    ctx.moveTo(130, 240)
-    ctx.lineTo(420, 240);
+    ctx.moveTo(xAxis + 150, yAxis)
+    ctx.lineTo(xAxis + 220, yAxis + 40);
+    ctx.moveTo(xAxis, yAxis)
+    ctx.lineTo(xAxis - 70, yAxis + 40);
+    ctx.moveTo(xAxis - 70, yAxis + 40)
+    ctx.lineTo(xAxis + 220, yAxis + 40);
     ctx.closePath();
     ctx.lineWidth = 5;
     ctx.strokeStyle = 'pink'
@@ -31,14 +35,14 @@ export const UFO = () => {
 
     // Antenna
     ctx.beginPath();
-    ctx.moveTo(200, 200)
-    ctx.lineTo(150, 170);
-    ctx.moveTo(350, 200)
-    ctx.lineTo(400, 170);
-    ctx.moveTo(400, 170)
-    ctx.arc(400, 170, 4, 0, 2 * Math.PI)
-    ctx.moveTo(150, 170)
-    ctx.arc(150, 170, 4, 0, 2 * Math.PI)
+    ctx.moveTo(xAxis, yAxis)
+    ctx.lineTo(xAxis - 50, yAxis - 30);
+    ctx.moveTo(xAxis + 150, yAxis)
+    ctx.lineTo(xAxis + 200, yAxis - 30);
+    ctx.moveTo(xAxis + 200, yAxis - 30)
+    ctx.arc(xAxis + 200, yAxis - 30, 4, 0, 2 * Math.PI)
+    ctx.moveTo(xAxis - 50, yAxis - 30)
+    ctx.arc(xAxis - 50, yAxis - 30, 4, 0, 2 * Math.PI)
     ctx.closePath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = 'orange'
@@ -48,7 +52,7 @@ export const UFO = () => {
 
     // green Antenna circle
     ctx.beginPath();
-    ctx.arc(400, 170, 4, 0, 2 * Math.PI)
+    ctx.arc(xAxis + 200, yAxis - 30, 4, 0, 2 * Math.PI)
     ctx.closePath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = 'green'
@@ -57,9 +61,9 @@ export const UFO = () => {
     ctx.stroke();
 
     // Body circles 
-    function createBodyCircle(xAxis, yAxis, lineColour, fillColour) {
+    function createBodyCircle(xAxisCircle, yAxisCircle, lineColour, fillColour) {
       ctx.beginPath();
-      ctx.arc(xAxis, yAxis, 4, 0, 2 * Math.PI)
+      ctx.arc(xAxisCircle, yAxisCircle, 4, 0, 2 * Math.PI)
       ctx.closePath();
       ctx.lineWidth = 3;
       ctx.strokeStyle = lineColour
@@ -68,11 +72,11 @@ export const UFO = () => {
       ctx.stroke();
     }
 
-    let xAxisCircle = 165
+    let xAxisCircle = xAxis - 35
     let colour = 'blue'
 
-    while (xAxisCircle <= 400) {
-      createBodyCircle(xAxisCircle, 231, 'orange', colour)
+    while (xAxisCircle <= xAxis + 200) {
+      createBodyCircle(xAxisCircle, yAxis + 31, 'orange', colour)
       xAxisCircle += 15
 
       if (colour === 'blue') {
