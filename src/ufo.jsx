@@ -13,6 +13,7 @@ export const UFO = (props) => {
     let xAxis = 200
     let yAxis = 200
     const render = () => {
+    ctx.clearRect(0, 0, 800, 450);
     // top of UFO 
     ctx.beginPath();
     ctx.moveTo(xAxis, yAxis)
