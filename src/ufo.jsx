@@ -6,9 +6,13 @@ export const UFO = (props) => {
     const ctx = canvas.getContext("2d");
 
     // UFO 
-    let xAxis = props.xAxis
-    let yAxis = props.yAxis
+    // let xAxis = props.xAxis
+    // let yAxis = props.yAxis
 
+    let requestId;
+    let xAxis = 200
+    let yAxis = 200
+    const render = () => {
     // top of UFO 
     ctx.beginPath();
     ctx.moveTo(xAxis, yAxis)
@@ -86,7 +90,15 @@ export const UFO = (props) => {
         colour = 'blue'
       }
     }
-  },[]
-  )
+    yAxis += 1
+    requestId = requestAnimationFrame(render)
+  }
+  render()
+
+  return () => {
+    cancelAnimationFrame(requestId)
+  }
+  });
+
   return <canvas width="800px" height="450px" ref={canvasRef} />
 }
