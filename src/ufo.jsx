@@ -68,12 +68,12 @@ export const UFO = () => {
       ctx.stroke();
     }
 
-    let xAxis = 165
+    let xAxisCircle = 165
     let colour = 'blue'
 
-    while (xAxis <= 400) {
-      createBodyCircle(xAxis, 231, 'orange', colour)
-      xAxis += 15
+    while (xAxisCircle <= 400) {
+      createBodyCircle(xAxisCircle, 231, 'orange', colour)
+      xAxisCircle += 15
 
       if (colour === 'blue') {
         colour = 'orange'

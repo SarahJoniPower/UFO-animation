@@ -4,7 +4,6 @@ export const App = () => {
     return <div>
         <h1> hey Theo </h1>
         <UFO />
-        <UFO />
     </div>
 }
 
