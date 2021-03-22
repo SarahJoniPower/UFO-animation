@@ -1,92 +1,134 @@
-import React, { useRef, useEffect } from "react"
-export const UFO = (props) => {
-  const canvasRef = useRef(null)
-  useEffect(() => {
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext("2d");
+import React, { useRef, useEffect } from "react";
 
-    // UFO 
-    let xAxis = props.xAxis
-    let yAxis = props.yAxis
+class UFODrawer {
+  constructor(canvas, context) {
+    this.canvas = canvas;
+    this.ctx = context;
+  }
 
-    // top of UFO 
+  clear() {
+    const { width, height } = this.canvas;
+    this.ctx.clearRect(0, 0, width, height);
+  }
+
+  draw(x, y) {
+    this.clear();
+    this.drawTop(x, y);
+    this.drawBottom(x, y);
+    this.drawAntenna(x, y);
+    this.drawAntennaCircle(x, y);
+    this.drawBodyCircles(x, y);
+  }
+
+  drawTop(x, y) {
+    const { ctx } = this;
     ctx.beginPath();
-    ctx.moveTo(xAxis, yAxis)
-    ctx.quadraticCurveTo(xAxis + 70, yAxis - 100, xAxis + 150, yAxis);
+    ctx.moveTo(x, y)
+    ctx.quadraticCurveTo(x + 70, y - 100, x + 150, y);
     ctx.closePath();
     ctx.lineWidth = 5;
     ctx.strokeStyle = 'pink'
     ctx.fillStyle = 'orange'
     ctx.fill()
     ctx.stroke();
+  }
 
-    // Bottom of UFO
+  drawBottom(x, y) {
+    const { ctx } = this;
     ctx.beginPath();
-    ctx.moveTo(xAxis + 150, yAxis)
-    ctx.lineTo(xAxis + 220, yAxis + 40);
-    ctx.moveTo(xAxis, yAxis)
-    ctx.lineTo(xAxis - 70, yAxis + 40);
-    ctx.moveTo(xAxis - 70, yAxis + 40)
-    ctx.lineTo(xAxis + 220, yAxis + 40);
+    ctx.moveTo(x + 150, y)
+    ctx.lineTo(x + 220, y + 40);
+    ctx.moveTo(x, y)
+    ctx.lineTo(x - 70, y + 40);
+    ctx.moveTo(x - 70, y + 40)
+    ctx.lineTo(x + 220, y + 40);
     ctx.closePath();
     ctx.lineWidth = 5;
     ctx.strokeStyle = 'pink'
     ctx.stroke();
+  }
 
-    // Antenna
+  drawAntenna(x, y) {
+    const { ctx } = this;
     ctx.beginPath();
-    ctx.moveTo(xAxis, yAxis)
-    ctx.lineTo(xAxis - 50, yAxis - 30);
-    ctx.moveTo(xAxis + 150, yAxis)
-    ctx.lineTo(xAxis + 200, yAxis - 30);
-    ctx.moveTo(xAxis + 200, yAxis - 30)
-    ctx.arc(xAxis + 200, yAxis - 30, 4, 0, 2 * Math.PI)
-    ctx.moveTo(xAxis - 50, yAxis - 30)
-    ctx.arc(xAxis - 50, yAxis - 30, 4, 0, 2 * Math.PI)
+    ctx.moveTo(x, y)
+    ctx.lineTo(x - 50, y - 30);
+    ctx.moveTo(x + 150, y)
+    ctx.lineTo(x + 200, y - 30);
+    ctx.moveTo(x + 200, y - 30)
+    ctx.arc(x + 200, y - 30, 4, 0, 2 * Math.PI)
+    ctx.moveTo(x - 50, y - 30)
+    ctx.arc(x - 50, y - 30, 4, 0, 2 * Math.PI)
     ctx.closePath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = 'orange'
     ctx.fillStyle = 'orange'
     ctx.fill()
     ctx.stroke();
+  }
 
-    // green Antenna circle
+  drawAntennaCircle(x, y) {
+    const { ctx } = this;
     ctx.beginPath();
-    ctx.arc(xAxis + 200, yAxis - 30, 4, 0, 2 * Math.PI)
+    ctx.arc(x + 200, y - 30, 4, 0, 2 * Math.PI)
     ctx.closePath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = 'green'
     ctx.fillStyle = 'green'
     ctx.fill()
     ctx.stroke();
+  }
 
-    // Body circles 
-    function createBodyCircle(xAxisCircle, yAxisCircle, lineColour, fillColour) {
-      ctx.beginPath();
-      ctx.arc(xAxisCircle, yAxisCircle, 4, 0, 2 * Math.PI)
-      ctx.closePath();
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = lineColour
-      ctx.fillStyle = fillColour
-      ctx.fill()
-      ctx.stroke();
-    }
+  drawBodyCircle(x, y, lineColour, fillColour) {
+    const { ctx } = this;
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, 2 * Math.PI)
+    ctx.closePath();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = lineColour
+    ctx.fillStyle = fillColour
+    ctx.fill()
+    ctx.stroke();
+  }
 
-    let xAxisCircle = xAxis - 35
+  drawBodyCircles(x, y) {
+    let currentX = x - 35
     let colour = 'blue'
 
-    while (xAxisCircle <= xAxis + 200) {
-      createBodyCircle(xAxisCircle, yAxis + 31, 'orange', colour)
-      xAxisCircle += 15
+    while (currentX <= x + 200) {
+      this.drawBodyCircle(currentX, y + 31, 'orange', colour)
+      currentX += 15;
 
       if (colour === 'blue') {
-        colour = 'orange'
-      }
-      else {
-        colour = 'blue'
+        colour = 'orange';
+      } else {
+        colour = 'blue';
       }
     }
-  },[]
-  )
-  return <canvas width="800px" height="450px" ref={canvasRef} />
+  }
+}
+
+UFODrawer.fromCanvas = canvas => {
+  return new UFODrawer(canvas, canvas.getContext("2d"));
+}
+
+export const UFO = ({ x, y }) => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const drawer = UFODrawer.fromCanvas(canvasRef.current)
+    let requestId = null;
+
+    const render = () => {
+      drawer.draw(x, y);
+      requestId = requestAnimationFrame(render);
+    };
+
+    render();
+    return () => cancelAnimationFrame(requestId);
+  });
+
+  return (
+    <canvas width="800px" height="450px" ref={canvasRef} />
+  );
 }
