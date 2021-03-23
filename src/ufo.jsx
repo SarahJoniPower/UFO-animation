@@ -1,34 +1,34 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useState } from "react"
 
 export const UFO = (props) => {
   const canvasRef = useRef(null)
+
+  let [finalPosition, setFinalPosition] = useState({x: props.xAxis, y: props.yAxis})
+  
+  // let array = [1, 2, 3] 
+  // let a = array[0] 
+  // let [a, b] = array
+
 
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
 
-    let xAxis = props.xAxis
-    let yAxis = props.yAxis
-    let yAxisStop = props.yAxisStop
-    let xAxisStop = props.xAxisStop
-
+    let {xAxis, yAxis} = props
+    
     let requestId;
 
     const render = () => {
       ctx.clearRect(0, 0, 800, 450);
-      drawUFO(xAxis, yAxis)
+      drawUFO(xAxis - 150, yAxis - 150)
 
-      if (yAxis < yAxisStop) {
+      if (yAxis < finalPosition.y) {
         yAxis += 1;
-      } else {
-        yAxis = yAxisStop;
-      };
+      } 
 
-      if (xAxis < xAxisStop) {
+      if (xAxis < finalPosition.x) {
         xAxis += 1;
-      } else {
-        xAxis = xAxisStop;
-      };
+      } 
       
       requestId = requestAnimationFrame(render)
     }
@@ -44,7 +44,7 @@ export const UFO = (props) => {
       drawBottom(x, y)
       drawAntenna(x, y)
       
-      if (yAxis === yAxisStop && xAxis === xAxisStop) { 
+      if (yAxis === finalPosition.y && xAxis === finalPosition.x) { 
         drawAntennaCircle(x, y, 'pink')
         drawBodyCircles(x, y, 'white')
       } else {
@@ -129,5 +129,10 @@ export const UFO = (props) => {
     };
   });
 
-  return <canvas width="800px" height="450px" ref={canvasRef} />
+  return <canvas 
+    width="800px" 
+    height="450px" 
+    ref={canvasRef} 
+    onClick={(event) => {setFinalPosition({x: event.clientX, y: event.clientY})}}
+    />
 }
