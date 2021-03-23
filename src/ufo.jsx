@@ -44,15 +44,13 @@ export const UFO = (props) => {
       drawBottom(x, y)
       drawAntenna(x, y)
       
-      if (yAxis === yAxisStop) { 
+      if (yAxis === yAxisStop && xAxis === xAxisStop) { 
         drawAntennaCircle(x, y, 'pink')
         drawBodyCircles(x, y, 'white')
       } else {
         drawAntennaCircle(x, y, 'green')
         drawBodyCircles(x, y, 'blue')
       }
-
-      // drawBodyCircles(x, y)
     };
 
     function drawTop(x, y) {
