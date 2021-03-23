@@ -10,6 +10,7 @@ export const UFO = (props) => {
     let xAxis = props.xAxis
     let yAxis = props.yAxis
     let yAxisStop = props.yAxisStop
+    let xAxisStop = props.xAxisStop
 
     let requestId;
 
@@ -21,6 +22,12 @@ export const UFO = (props) => {
         yAxis += 1;
       } else {
         yAxis = yAxisStop;
+      };
+
+      if (xAxis < xAxisStop) {
+        xAxis += 1;
+      } else {
+        xAxis = xAxisStop;
       };
       
       requestId = requestAnimationFrame(render)
