@@ -43,8 +43,16 @@ export const UFO = (props) => {
       drawTop(x, y)
       drawBottom(x, y)
       drawAntenna(x, y)
-      drawAntennaCircle(x, y, 'green')
-      drawBodyCircles(x, y)
+      
+      if (yAxis === yAxisStop) { 
+        drawAntennaCircle(x, y, 'pink')
+        drawBodyCircles(x, y, 'white')
+      } else {
+        drawAntennaCircle(x, y, 'green')
+        drawBodyCircles(x, y, 'blue')
+      }
+
+      // drawBodyCircles(x, y)
     };
 
     function drawTop(x, y) {
@@ -113,19 +121,12 @@ export const UFO = (props) => {
       ctx.stroke();
     }
 
-    function drawBodyCircles(x, y) {
+    function drawBodyCircles(x, y, fillColour) {
       let xAxisCircle = xAxis - 35
-      let colour = 'blue'
 
       while (xAxisCircle <= xAxis + 200) {
-        drawBodyCircle(xAxisCircle, yAxis + 31, 'orange', colour)
+        drawBodyCircle(xAxisCircle, yAxis + 31, 'orange', fillColour)
         xAxisCircle += 15
-
-        if (colour === 'blue') {
-          colour = 'orange'
-        } else {
-          colour = 'blue'
-        }
       }
     };
   });
