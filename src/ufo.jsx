@@ -7,24 +7,38 @@ export const UFO = (props) => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
 
-    // UFO 
-    // let xAxis = props.xAxis
-    // let yAxis = props.yAxis
+    let xAxis = props.xAxis
+    let yAxis = props.yAxis
+    let yAxisStop = props.yAxisStop
 
     let requestId;
-    let xAxis = 400
-    let yAxis = 0
-    let antenna = 'green'
 
-      const render = () => {
+    const render = () => {
       ctx.clearRect(0, 0, 800, 450);
-    
-    
-    drawTop(xAxis, yAxis)
-    drawBottom(xAxis, yAxis)
-    drawAntenna(xAxis, yAxis)
-    drawAntennaCircle(xAxis, yAxis, 'purple')
-    drawBodyCircles(xAxis, yAxis)
+      drawUFO(xAxis, yAxis)
+
+      if (yAxis < yAxisStop) {
+        yAxis += 1;
+      } else {
+        yAxis = yAxisStop;
+      };
+      
+      requestId = requestAnimationFrame(render)
+    }
+
+    render()
+
+    return () => {
+      cancelAnimationFrame(requestId)
+    }
+  
+    function drawUFO(x, y) {
+      drawTop(x, y)
+      drawBottom(x, y)
+      drawAntenna(x, y)
+      drawAntennaCircle(x, y, 'green')
+      drawBodyCircles(x, y)
+    };
 
     function drawTop(x, y) {
       ctx.beginPath();
@@ -106,18 +120,7 @@ export const UFO = (props) => {
           colour = 'blue'
         }
       }
-    }
-
-    yAxis += 1
-    requestId = requestAnimationFrame(render)
-
-  }
-    
-    render()
-
-    return () => {
-      cancelAnimationFrame(requestId)
-    }
+    };
   });
 
   return <canvas width="800px" height="450px" ref={canvasRef} />
