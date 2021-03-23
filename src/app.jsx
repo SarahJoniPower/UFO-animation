@@ -1,19 +1,14 @@
-import React, { useState } from "react"
-import { UFO } from "./ufo"
+import React, { useState } from "react";
+
+import { UFO } from "./ufo";
+import { Physics } from "./physics";
 
 export const App = () => {
-    const [height, setHeight] = useState(0);
-    const [width, setWidth] = useState(0);
-
-    const onMouseMove = ({ clientX, clientY }) => {
-      setHeight(clientY - 100);
-      setWidth(clientX - 150);
-    };
+    const physics = Physics.startingAt(50, 0);
 
     return (
-      <div onMouseMove={onMouseMove}>
-        <h1>Hey Sarah - I'm using mousemove now!</h1>
-        <UFO x={width} y={height} />
+      <div onClick={() => physics.thrust(0, -0.5)}>
+        <UFO physics={physics} />
       </div>
     );
 }
