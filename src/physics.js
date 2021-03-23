@@ -13,7 +13,7 @@ export class Physics {
     return new Physics({
       x,
       y,
-      vx: 1,
+      vx: 0.5,
       vy: 0,
       lastUpdated: Physics.getTimestamp(),
       floor: 500,
