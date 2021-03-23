@@ -120,10 +120,10 @@ export const UFO = (props) => {
     }
 
     function drawBodyCircles(x, y, fillColour) {
-      let xAxisCircle = xAxis - 35
+      let xAxisCircle = xAxis - 185
 
-      while (xAxisCircle <= xAxis + 200) {
-        drawBodyCircle(xAxisCircle, yAxis + 31, 'orange', fillColour)
+      while (xAxisCircle <= xAxis + 50) {
+        drawBodyCircle(xAxisCircle, yAxis - 119, 'orange', fillColour)
         xAxisCircle += 15
       }
     };
