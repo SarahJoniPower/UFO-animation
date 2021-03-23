@@ -10,10 +10,11 @@ export const UFO = (props) => {
     // let yAxis = props.yAxis
 
     let requestId;
-    let xAxis = 200
-    let yAxis = 200
+    let xAxis = 400
+    let yAxis = 0
     const render = () => {
     ctx.clearRect(0, 0, 800, 450);
+
     // top of UFO 
     ctx.beginPath();
     ctx.moveTo(xAxis, yAxis)
@@ -86,8 +87,7 @@ export const UFO = (props) => {
 
       if (colour === 'blue') {
         colour = 'orange'
-      }
-      else {
+      } else {
         colour = 'blue'
       }
     }
