@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react"
+
 export const UFO = (props) => {
   const canvasRef = useRef(null)
+
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
@@ -12,64 +14,76 @@ export const UFO = (props) => {
     let requestId;
     let xAxis = 400
     let yAxis = 0
-    const render = () => {
-    ctx.clearRect(0, 0, 800, 450);
+    let antenna = 'green'
 
-    // top of UFO 
-    ctx.beginPath();
-    ctx.moveTo(xAxis, yAxis)
-    ctx.quadraticCurveTo(xAxis + 70, yAxis - 100, xAxis + 150, yAxis);
-    ctx.closePath();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = 'pink'
-    ctx.fillStyle = 'orange'
-    ctx.fill()
-    ctx.stroke();
+      const render = () => {
+      ctx.clearRect(0, 0, 800, 450);
+    
+    
+    drawTop(xAxis, yAxis)
+    drawBottom(xAxis, yAxis)
+    drawAntenna(xAxis, yAxis)
+    drawAntennaCircle(xAxis, yAxis, 'purple')
+    drawBodyCircles(xAxis, yAxis)
 
-    // Bottom of UFO
-    ctx.beginPath();
-    ctx.moveTo(xAxis + 150, yAxis)
-    ctx.lineTo(xAxis + 220, yAxis + 40);
-    ctx.moveTo(xAxis, yAxis)
-    ctx.lineTo(xAxis - 70, yAxis + 40);
-    ctx.moveTo(xAxis - 70, yAxis + 40)
-    ctx.lineTo(xAxis + 220, yAxis + 40);
-    ctx.closePath();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = 'pink'
-    ctx.stroke();
-
-    // Antenna
-    ctx.beginPath();
-    ctx.moveTo(xAxis, yAxis)
-    ctx.lineTo(xAxis - 50, yAxis - 30);
-    ctx.moveTo(xAxis + 150, yAxis)
-    ctx.lineTo(xAxis + 200, yAxis - 30);
-    ctx.moveTo(xAxis + 200, yAxis - 30)
-    ctx.arc(xAxis + 200, yAxis - 30, 4, 0, 2 * Math.PI)
-    ctx.moveTo(xAxis - 50, yAxis - 30)
-    ctx.arc(xAxis - 50, yAxis - 30, 4, 0, 2 * Math.PI)
-    ctx.closePath();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = 'orange'
-    ctx.fillStyle = 'orange'
-    ctx.fill()
-    ctx.stroke();
-
-    // green Antenna circle
-    ctx.beginPath();
-    ctx.arc(xAxis + 200, yAxis - 30, 4, 0, 2 * Math.PI)
-    ctx.closePath();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = 'green'
-    ctx.fillStyle = 'green'
-    ctx.fill()
-    ctx.stroke();
-
-    // Body circles 
-    function createBodyCircle(xAxisCircle, yAxisCircle, lineColour, fillColour) {
+    function drawTop(x, y) {
       ctx.beginPath();
-      ctx.arc(xAxisCircle, yAxisCircle, 4, 0, 2 * Math.PI)
+      ctx.moveTo(x, y)
+      ctx.quadraticCurveTo(x + 70, y - 100, x + 150, y);
+      ctx.closePath();
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = 'pink'
+      ctx.fillStyle = 'orange'
+      ctx.fill()
+      ctx.stroke();
+    };
+
+    function drawBottom(x, y) {
+      ctx.beginPath();
+      ctx.moveTo(x + 150, y)
+      ctx.lineTo(x + 220, y + 40);
+      ctx.moveTo(x, y)
+      ctx.lineTo(x - 70, y + 40);
+      ctx.moveTo(x - 70, y + 40)
+      ctx.lineTo(x + 220, y + 40);
+      ctx.closePath();
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = 'pink'
+      ctx.stroke();
+    };
+
+    function drawAntenna(x, y) {
+      ctx.beginPath();
+      ctx.moveTo(x, y)
+      ctx.lineTo(x - 50, y - 30);
+      ctx.moveTo(x + 150, y)
+      ctx.lineTo(x + 200, y - 30);
+      ctx.moveTo(x+ 200, y - 30)
+      ctx.arc(x + 200, y - 30, 4, 0, 2 * Math.PI)
+      ctx.moveTo(x- 50, y - 30)
+      ctx.arc(x- 50, y - 30, 4, 0, 2 * Math.PI)
+      ctx.closePath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'orange'
+      ctx.fillStyle = 'orange'
+      ctx.fill()
+      ctx.stroke();
+    };
+
+    function drawAntennaCircle(x, y, colour) {
+      ctx.beginPath();
+      ctx.arc(x + 200, y - 30, 4, 0, 2 * Math.PI)
+      ctx.closePath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = colour
+      ctx.fillStyle = colour
+      ctx.fill()
+      ctx.stroke();
+    };
+
+    function drawBodyCircle(x, y, lineColour, fillColour) {
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, 2 * Math.PI)
       ctx.closePath();
       ctx.lineWidth = 3;
       ctx.strokeStyle = lineColour
@@ -78,27 +92,32 @@ export const UFO = (props) => {
       ctx.stroke();
     }
 
-    let xAxisCircle = xAxis - 35
-    let colour = 'blue'
+    function drawBodyCircles(x, y) {
+      let xAxisCircle = xAxis - 35
+      let colour = 'blue'
 
-    while (xAxisCircle <= xAxis + 200) {
-      createBodyCircle(xAxisCircle, yAxis + 31, 'orange', colour)
-      xAxisCircle += 15
+      while (xAxisCircle <= xAxis + 200) {
+        drawBodyCircle(xAxisCircle, yAxis + 31, 'orange', colour)
+        xAxisCircle += 15
 
-      if (colour === 'blue') {
-        colour = 'orange'
-      } else {
-        colour = 'blue'
+        if (colour === 'blue') {
+          colour = 'orange'
+        } else {
+          colour = 'blue'
+        }
       }
     }
+
     yAxis += 1
     requestId = requestAnimationFrame(render)
-  }
-  render()
 
-  return () => {
-    cancelAnimationFrame(requestId)
   }
+    
+    render()
+
+    return () => {
+      cancelAnimationFrame(requestId)
+    }
   });
 
   return <canvas width="800px" height="450px" ref={canvasRef} />
