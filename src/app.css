@@ -9,5 +9,9 @@ h2 {
 }
 
 h3 {
-  color: darkblue;
+  color: rgb(5, 5, 110);
+}
+
+h4 {
+  color: rgb(216, 75, 39);
 }

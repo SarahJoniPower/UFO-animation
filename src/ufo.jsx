@@ -91,9 +91,12 @@ export const UFO = (props) => {
       ctx.lineTo(x - 50, y + 25);
       ctx.moveTo(x - 50, y + 25)
       ctx.lineTo(x + 130, y + 25);
+    
       ctx.closePath();
       ctx.lineWidth = 3;
       ctx.strokeStyle = 'pink'
+      ctx.fillStyle = 'pink'
+      ctx.fill()
       ctx.stroke();
     };
 
@@ -177,8 +180,8 @@ export const UFO = (props) => {
     function drawSky(x, y) {
       ctx.beginPath();
       ctx.rect(0, 0, x, y);
-      ctx.fillStyle = 'rgb(10, 19, 150)';
-      ctx.strokeStyle = 'rgb(10, 19, 150)';
+      ctx.fillStyle = 'rgb(5, 5, 110)';
+      ctx.strokeStyle = 'rgb(5, 5, 110)';
       ctx.stroke();
       ctx.fill()
     };
