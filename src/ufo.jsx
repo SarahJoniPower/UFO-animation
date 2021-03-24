@@ -150,8 +150,12 @@ export const UFO = (props) => {
 
     function drawBackground() {
       drawSky()
-      drawGround()
       drawBigDipper(250, 100)
+      drawCancer(470, 20)
+      drawThreeStars(400, 100)
+      drawThreeStars(300, 20)
+      drawThreeStars(100, 300)
+      drawGround()
     };
 
     function drawSky() {
@@ -174,6 +178,40 @@ export const UFO = (props) => {
       ctx.lineTo(800, 0)
       ctx.strokeStyle = 'rgb(240, 101, 67)';
       ctx.fillStyle = 'rgb(240, 101, 67)';
+      ctx.fill()
+      ctx.stroke();
+    };
+
+    function drawThreeStars(x, y) {
+      ctx.beginPath()
+      ctx.arc(x, y, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 30, y + 20)
+      ctx.arc(x + 30, y + 20, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 40, y - 20)
+      ctx.arc(x + 40, y - 20, 1.5, 0, 2 * Math.PI)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'blue'
+      ctx.strokeStyle = 'blue'
+      ctx.fillStyle = 'blue'
+      ctx.fill()
+      ctx.stroke();
+    };
+
+    function drawCancer(x, y) {
+      ctx.beginPath()
+      ctx.arc(x, y, 1.5, 0, 2 * Math.PI)
+      ctx.lineTo(x + 30, y + 30)
+      ctx.arc(x + 30, y + 30, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 30, y + 30)
+      ctx.lineTo(x + 40, y + 50)
+      ctx.arc(x + 40, y + 50, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 40, y + 50)
+      ctx.lineTo(x + 40, y + 70)
+      ctx.arc(x + 40, y + 70, 1.5, 0, 2 * Math.PI)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'blue'
+      ctx.strokeStyle = 'blue'
+      ctx.fillStyle = 'blue'
       ctx.fill()
       ctx.stroke();
     };

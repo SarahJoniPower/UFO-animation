@@ -1,6 +1,6 @@
 # UFO Animation Challenge 
 
-An animation of a UFO landing. 
+An interactive animation of a UFO landing. 
 
 Project must include: 
 A sky
