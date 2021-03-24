@@ -51,8 +51,8 @@ export const UFO = (props) => {
         drawAntennaCircle(x, y, 'pink')
         drawBodyCircles(x, y, 'white')
       } else {
-        drawAntennaCircle(x, y, 'green')
-        drawBodyCircles(x, y, 'blue')
+        drawAntennaCircle(x, y, 'red')
+        drawBodyCircles(x, y, 'purple')
       }
     };
 
@@ -138,11 +138,26 @@ export const UFO = (props) => {
       // grey box outline
       ctx.beginPath();
       ctx.rect(0, 0, 800, 400);
-      ctx.strokeStyle = 'black';
+      ctx.fillStyle = 'rgb(10, 19, 150)';
+      ctx.strokeStyle = 'rgb(10, 19, 150)';
+      ctx.stroke();
+      ctx.fill()
+
+      // drawing ground
+      ctx.beginPath()
+      ctx.moveTo(800, 0)
+      ctx.bezierCurveTo(600, 80, 650, 80, 650, 150)
+      ctx.bezierCurveTo(600, 200, 650, 200, 400, 250)
+      ctx.bezierCurveTo(400, 270, 450, 230, 150, 300)
+      ctx.bezierCurveTo(100, 300, 150, 300, 0, 400)
+      ctx.lineTo(800, 400)
+      ctx.lineTo(800, 0)
+      ctx.strokeStyle = 'rgb(240, 101, 67)';
+      ctx.fillStyle = 'rgb(240, 101, 67)';
+      ctx.fill()
       ctx.stroke();
 
-      // 
-    }
+    };
 
   });
 
