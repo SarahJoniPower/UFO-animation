@@ -155,6 +155,15 @@ export const UFO = (props) => {
       drawThreeStars(400, 100)
       drawThreeStars(300, 20)
       drawThreeStars(100, 300)
+      drawThreeStars(50, 200)
+      drawThreeStars(600, 100)
+      drawThreeStars(500, 70)
+      drawThreeStars(10, 10)
+      drawThreeStars(50, 50)
+      drawThreeStars(450, 210)
+      drawPlanet(205, 55, 27)
+      drawPlanet(200, 200, 24)
+      drawPlanet(650, 30, 17)
       drawGround()
     };
 
@@ -182,6 +191,20 @@ export const UFO = (props) => {
       ctx.stroke();
     };
 
+    function drawPlanet(x, y, radius) {
+      ctx.beginPath()
+      ctx.arc(x, y, radius, 0, 2 * Math.PI)
+      ctx.moveTo(x - 40, y + 10)
+      ctx.bezierCurveTo(x, y + 5, x, y + 5, x + 40, y - 10)
+      ctx.moveTo(x - 40, y + 10)
+      ctx.lineTo(x - radius, y - 1)
+      ctx.moveTo(x + 40, y - 10)
+      ctx.lineTo(x + radius, y - 10)
+      ctx.strokeStyle = 'blue'
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    };
+
     function drawThreeStars(x, y) {
       ctx.beginPath()
       ctx.arc(x, y, 1.5, 0, 2 * Math.PI)
@@ -190,7 +213,6 @@ export const UFO = (props) => {
       ctx.moveTo(x + 40, y - 20)
       ctx.arc(x + 40, y - 20, 1.5, 0, 2 * Math.PI)
       ctx.lineWidth = 1;
-      ctx.strokeStyle = 'blue'
       ctx.strokeStyle = 'blue'
       ctx.fillStyle = 'blue'
       ctx.fill()
