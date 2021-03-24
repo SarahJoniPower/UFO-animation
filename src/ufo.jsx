@@ -22,16 +22,33 @@ export const UFO = (props) => {
       ctx.clearRect(0, 0, 800, 450);
 
       drawBackground()
-      drawUFO(xAxis - 140, yAxis - 180)
+      drawUFO(xAxis - 140, yAxis - 225)
 
       
       if (yAxis < finalPosition.y) {
-        yAxis += 3;
+        yAxis += ySpeed(xAxis, yAxis, finalPosition.x, finalPosition.y)
+        // yAxis += ((finalPosition.y - yAxis) / ((finalPosition.x - xAxis) / 4)) ;
       } 
 
       if (xAxis < finalPosition.x) {
-        xAxis += 3;
+        xAxis += xSpeed(xAxis, yAxis, finalPosition.x, finalPosition.y);
       } 
+
+      function ySpeed(x, y, xFinal, yFinal) {
+        if (xFinal - x >= yFinal - y) {
+          return ((yFinal - y) / ((xFinal - x) / 4))
+        } else {
+          return 4
+        }
+      };
+
+      function xSpeed(x, y, xFinal, yFinal) {
+        if (yFinal - y > xFinal - x) {
+          return ((xFinal - x) / ((yFinal - y) / 4))
+        } else {
+          return 4
+        }
+      };
 
 
       
@@ -130,7 +147,7 @@ export const UFO = (props) => {
       let xAxisCircle = xAxis - 170
 
       while (xAxisCircle <= xAxis - 30) {
-        drawBodyCircle(xAxisCircle, yAxis - 160.5, 'orange', fillColour)
+        drawBodyCircle(xAxisCircle, yAxis - 205.5, 'orange', fillColour)
         xAxisCircle += 10
       }
     };

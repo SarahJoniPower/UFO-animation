@@ -6,7 +6,7 @@ export const App = () => {
     return <div>
         <h2> Land a UFO! </h2>
         <h3> Click in box where you want to land </h3>
-        <UFO xAxis={205} yAxis={220} />
+        <UFO xAxis={205} yAxis={265} />
     </div>
 }
 
