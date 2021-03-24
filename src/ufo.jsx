@@ -149,8 +149,8 @@ export const UFO = (props) => {
     };
 
     function drawBackground() {
-      drawSky()
-      drawBigDipper(250, 100)
+      drawSky(800, 450)
+      drawBigDipper(250, 120)
       drawCancer(470, 20)
       drawThreeStars(400, 100)
       drawThreeStars(300, 20)
@@ -162,29 +162,30 @@ export const UFO = (props) => {
       drawThreeStars(50, 50)
       drawThreeStars(450, 210)
       drawPlanet(205, 55, 27)
-      drawPlanet(200, 200, 24)
+      drawPlanet(200, 230, 24)
       drawPlanet(650, 30, 17)
-      drawGround()
+      drawGround(800, 450)
     };
 
-    function drawSky() {
+    function drawSky(x, y) {
       ctx.beginPath();
-      ctx.rect(0, 0, 800, 400);
+      ctx.rect(0, 0, x, y);
       ctx.fillStyle = 'rgb(10, 19, 150)';
       ctx.strokeStyle = 'rgb(10, 19, 150)';
       ctx.stroke();
       ctx.fill()
     };
 
-    function drawGround() {
+    // x = 800 y = 450
+    function drawGround(x, y) {
       ctx.beginPath()
       ctx.moveTo(800, 0)
-      ctx.bezierCurveTo(600, 80, 650, 80, 650, 150)
-      ctx.bezierCurveTo(600, 200, 650, 200, 400, 250)
-      ctx.bezierCurveTo(400, 270, 450, 230, 150, 300)
-      ctx.bezierCurveTo(100, 300, 150, 300, 0, 400)
-      ctx.lineTo(800, 400)
-      ctx.lineTo(800, 0)
+      ctx.bezierCurveTo(600, 170, 650, 180, x - 150, y - 250)
+      ctx.bezierCurveTo(600, 200, 650, 200, x - 400, y - 150)
+      ctx.bezierCurveTo(400, 270, 450, 230, x - 650, y - 100)
+      ctx.bezierCurveTo(100, 350, 150, 400, x - x, y)
+      ctx.lineTo(x, y)
+      ctx.lineTo(x, 0)
       ctx.strokeStyle = 'rgb(240, 101, 67)';
       ctx.fillStyle = 'rgb(240, 101, 67)';
       ctx.fill()
