@@ -165,6 +165,13 @@ export const UFO = (props) => {
       drawPlanet(200, 230, 24)
       drawPlanet(650, 30, 17)
       drawGround(800, 450)
+
+      drawPlant(600, 350, 'purple', 'yellow', 3)
+      drawPlant(500, 450, 'purple', 'green', 5)
+      drawPlant(400, 450, 'purple', 'blue', 4)
+      drawPlant(420, 400, 'purple', 'purple', 2)
+      drawPlant(220, 450, 'purple', 'purple', 2)
+      drawPlant(180, 470, 'purple', 'purple', 2)
     };
 
     function drawSky(x, y) {
@@ -176,7 +183,6 @@ export const UFO = (props) => {
       ctx.fill()
     };
 
-    // x = 800 y = 450
     function drawGround(x, y) {
       ctx.beginPath()
       ctx.moveTo(800, 0)
@@ -190,6 +196,37 @@ export const UFO = (props) => {
       ctx.fillStyle = 'rgb(240, 101, 67)';
       ctx.fill()
       ctx.stroke();
+    };
+
+    function drawPlant(x, y, lineColour, fillColour, leafRadius) {
+      ctx.beginPath();
+      ctx.moveTo(x, y)
+      ctx.lineTo(x, y - 45)
+      ctx.moveTo(x, y - 45)
+      ctx.lineTo(x - 15, y - 37)
+      ctx.moveTo(x - 15, y - 37)
+      ctx.arc(x - 15, y - 37, leafRadius, 0, 2 * Math.PI)
+      ctx.moveTo(x, y - 45)
+      ctx.lineTo(x - 20, y - 50)
+      ctx.moveTo(x - 20, y - 50)
+      ctx.arc(x - 20, y - 50, leafRadius + 1, 0, 2 * Math.PI)
+      ctx.moveTo(x, y - 45)
+      ctx.lineTo(x - 10, y - 67)
+      ctx.moveTo(x - 10, y - 67)
+      ctx.arc(x - 10, y - 67, leafRadius, 0, 2 * Math.PI)
+      ctx.moveTo(x, y - 45)
+      ctx.lineTo(x + 15, y - 60)
+      ctx.moveTo(x + 15, y - 60)
+      ctx.arc(x + 15, y - 60, leafRadius + 1, 0, 2 * Math.PI)
+      ctx.moveTo(x, y - 45)
+      ctx.lineTo(x + 22, y - 30)
+      ctx.moveTo(x + 22, y - 30)
+      ctx.arc(x + 22, y - 30, leafRadius, 0, 2 * Math.PI)
+      ctx.strokeStyle = lineColour
+      ctx.fillStyle = fillColour
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.fill()
     };
 
     function drawPlanet(x, y, radius) {
@@ -262,7 +299,6 @@ export const UFO = (props) => {
       ctx.moveTo(x + 70, y + 37)
       ctx.lineTo(x + 70, y + 10)
       ctx.lineWidth = 1;
-      ctx.strokeStyle = 'blue'
       ctx.strokeStyle = 'blue'
       ctx.fillStyle = 'blue'
       ctx.fill()
