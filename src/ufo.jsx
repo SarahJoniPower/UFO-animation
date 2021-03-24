@@ -32,6 +32,8 @@ export const UFO = (props) => {
       if (xAxis < finalPosition.x) {
         xAxis += 3;
       } 
+
+
       
       requestId = requestAnimationFrame(render)
     }
