@@ -3,19 +3,18 @@ import React, { useRef, useEffect, useState } from "react"
 export const UFO = (props) => {
   const canvasRef = useRef(null)
 
-  let [finalPosition, setFinalPosition] = useState({x: props.xAxis, y: props.yAxis})
-  
+  let [finalPosition, setFinalPosition] = useState({ x: props.xAxis, y: props.yAxis })
+
   // let array = [1, 2, 3] 
   // let a = array[0] 
   // let [a, b] = array
-
 
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
 
-    let {xAxis, yAxis} = props
-    
+    let { xAxis, yAxis } = props
+
     let requestId;
 
     const render = () => {
@@ -24,15 +23,14 @@ export const UFO = (props) => {
       drawBackground()
       drawUFO(xAxis - 140, yAxis - 225)
 
-      
       if (yAxis < finalPosition.y) {
         yAxis += ySpeed(xAxis, yAxis, finalPosition.x, finalPosition.y)
         // yAxis += ((finalPosition.y - yAxis) / ((finalPosition.x - xAxis) / 4)) ;
-      } 
+      }
 
       if (xAxis < finalPosition.x) {
         xAxis += xSpeed(xAxis, yAxis, finalPosition.x, finalPosition.y);
-      } 
+      }
 
       function ySpeed(x, y, xFinal, yFinal) {
         if (xFinal - x >= yFinal - y) {
@@ -50,8 +48,6 @@ export const UFO = (props) => {
         }
       };
 
-
-      
       requestId = requestAnimationFrame(render)
     }
 
@@ -60,13 +56,13 @@ export const UFO = (props) => {
     return () => {
       cancelAnimationFrame(requestId)
     }
-  
+
     function drawUFO(x, y) {
       drawTop(x, y)
       drawBottom(x, y)
       drawAntenna(x, y)
-      
-      if (yAxis >= finalPosition.y && xAxis >= finalPosition.x) { 
+
+      if (yAxis >= finalPosition.y && xAxis >= finalPosition.x) {
         drawAntennaCircle(x, y, 'pink')
         drawBodyCircles(x, y, 'white')
       } else {
@@ -109,8 +105,8 @@ export const UFO = (props) => {
       ctx.lineTo(x + 115, y - 15);
       ctx.moveTo(x + 115, y - 15)
       ctx.arc(x + 115, y - 15, 2, 0, 2 * Math.PI)
-      ctx.moveTo(x- 35, y - 15)
-      ctx.arc(x- 35, y - 15, 2, 0, 2 * Math.PI)
+      ctx.moveTo(x - 35, y - 15)
+      ctx.arc(x - 35, y - 15, 2, 0, 2 * Math.PI)
       ctx.closePath();
       ctx.lineWidth = 1;
       ctx.strokeStyle = 'orange'
@@ -122,8 +118,8 @@ export const UFO = (props) => {
     function drawAntennaCircle(x, y, colour) {
       ctx.beginPath();
       ctx.arc(x + 115, y - 15, 2.7, 0, 2 * Math.PI)
-      ctx.moveTo(x- 35, y - 15)
-      ctx.arc(x- 35, y - 15, 2.7, 0, 2 * Math.PI)
+      ctx.moveTo(x - 35, y - 15)
+      ctx.arc(x - 35, y - 15, 2.7, 0, 2 * Math.PI)
       ctx.closePath();
       ctx.lineWidth = 1.2;
       ctx.strokeStyle = colour
@@ -153,16 +149,21 @@ export const UFO = (props) => {
     };
 
     function drawBackground() {
+      drawSky()
+      drawGround()
+      drawBigDipper(250, 100)
+    };
 
-      // grey box outline
+    function drawSky() {
       ctx.beginPath();
       ctx.rect(0, 0, 800, 400);
       ctx.fillStyle = 'rgb(10, 19, 150)';
       ctx.strokeStyle = 'rgb(10, 19, 150)';
       ctx.stroke();
       ctx.fill()
+    };
 
-      // drawing ground
+    function drawGround() {
       ctx.beginPath()
       ctx.moveTo(800, 0)
       ctx.bezierCurveTo(600, 80, 650, 80, 650, 150)
@@ -175,15 +176,43 @@ export const UFO = (props) => {
       ctx.fillStyle = 'rgb(240, 101, 67)';
       ctx.fill()
       ctx.stroke();
-
     };
 
+    function drawBigDipper(x, y) {
+      ctx.beginPath()
+      ctx.arc(x, y, 1.5, 0, 2 * Math.PI)
+      ctx.lineTo(x + 40, y - 10)
+      ctx.arc(x + 40, y - 10, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 40, y - 10)
+      ctx.lineTo(x + 60, y)
+      ctx.arc(x + 60, y, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 60, y)
+      ctx.lineTo(x + 70, y + 10)
+      ctx.arc(x + 70, y + 10, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 70, y + 10)
+      ctx.lineTo(x + 120, y - 10)
+      ctx.arc(x + 120, y - 10, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 120, y - 10)
+      ctx.lineTo(x + 118, y + 30)
+      ctx.arc(x + 118, y + 30, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 118, y + 30)
+      ctx.lineTo(x + 70, y + 37)
+      ctx.arc(x + 70, y + 37, 1.5, 0, 2 * Math.PI)
+      ctx.moveTo(x + 70, y + 37)
+      ctx.lineTo(x + 70, y + 10)
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'blue'
+      ctx.strokeStyle = 'blue'
+      ctx.fillStyle = 'blue'
+      ctx.fill()
+      ctx.stroke();
+    };
   });
 
-  return <canvas 
-    width="800px" 
+  return <canvas
+    width="800px"
     height="450px"
-    ref={canvasRef} 
-    onClick={(event) => {setFinalPosition({x: event.clientX, y: event.clientY})}}
-    />
+    ref={canvasRef}
+    onClick={(event) => { setFinalPosition({ x: event.clientX, y: event.clientY }) }}
+  />
 }
