@@ -20,8 +20,11 @@ export const UFO = (props) => {
 
     const render = () => {
       ctx.clearRect(0, 0, 800, 450);
+
+      drawBackground()
       drawUFO(xAxis - 150, yAxis - 150)
 
+      
       if (yAxis < finalPosition.y) {
         yAxis += 1;
       } 
@@ -44,6 +47,7 @@ export const UFO = (props) => {
       drawBottom(x, y)
       drawAntenna(x, y)
       
+      // there is a bug in the lights - won't change if final position x or y is same as start 
       if (yAxis === finalPosition.y && xAxis === finalPosition.x) { 
         drawAntennaCircle(x, y, 'pink')
         drawBodyCircles(x, y, 'white')
@@ -56,7 +60,7 @@ export const UFO = (props) => {
     function drawTop(x, y) {
       ctx.beginPath();
       ctx.moveTo(x, y)
-      ctx.quadraticCurveTo(x + 70, y - 100, x + 150, y);
+      ctx.quadraticCurveTo(x + 70, y - 90, x + 150, y);
       ctx.closePath();
       ctx.lineWidth = 5;
       ctx.strokeStyle = 'pink'
@@ -127,11 +131,23 @@ export const UFO = (props) => {
         xAxisCircle += 15
       }
     };
+
+    function drawBackground() {
+
+      // grey box outline
+      ctx.beginPath();
+      ctx.rect(0, 0, 800, 400);
+      ctx.strokeStyle = 'black';
+      ctx.stroke();
+
+      // 
+    }
+
   });
 
   return <canvas 
     width="800px" 
-    height="450px" 
+    height="450px"
     ref={canvasRef} 
     onClick={(event) => {setFinalPosition({x: event.clientX, y: event.clientY})}}
     />
