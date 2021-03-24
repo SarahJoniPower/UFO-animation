@@ -22,15 +22,15 @@ export const UFO = (props) => {
       ctx.clearRect(0, 0, 800, 450);
 
       drawBackground()
-      drawUFO(xAxis - 150, yAxis - 150)
+      drawUFO(xAxis - 140, yAxis - 180)
 
       
       if (yAxis < finalPosition.y) {
-        yAxis += 1;
+        yAxis += 3;
       } 
 
       if (xAxis < finalPosition.x) {
-        xAxis += 1;
+        xAxis += 3;
       } 
       
       requestId = requestAnimationFrame(render)
@@ -59,9 +59,9 @@ export const UFO = (props) => {
     function drawTop(x, y) {
       ctx.beginPath();
       ctx.moveTo(x, y)
-      ctx.quadraticCurveTo(x + 40, y - 65, x + 100, y);
+      ctx.quadraticCurveTo(x + 40, y - 60, x + 80, y);
       ctx.closePath();
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 3;
       ctx.strokeStyle = 'pink'
       ctx.fillStyle = 'orange'
       ctx.fill()
@@ -70,14 +70,14 @@ export const UFO = (props) => {
 
     function drawBottom(x, y) {
       ctx.beginPath();
-      ctx.moveTo(x + 100, y)
-      ctx.lineTo(x + 160, y + 30);
+      ctx.moveTo(x + 80, y)
+      ctx.lineTo(x + 130, y + 25);
       ctx.moveTo(x, y)
-      ctx.lineTo(x - 60, y + 30);
-      ctx.moveTo(x - 60, y + 30)
-      ctx.lineTo(x + 160, y + 30);
+      ctx.lineTo(x - 50, y + 25);
+      ctx.moveTo(x - 50, y + 25)
+      ctx.lineTo(x + 130, y + 25);
       ctx.closePath();
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 3;
       ctx.strokeStyle = 'pink'
       ctx.stroke();
     };
@@ -85,15 +85,15 @@ export const UFO = (props) => {
     function drawAntenna(x, y) {
       ctx.beginPath();
       ctx.moveTo(x, y)
-      ctx.lineTo(x - 40, y - 20);
-      ctx.moveTo(x + 100, y)
-      ctx.lineTo(x + 140, y - 20);
-      ctx.moveTo(x + 140, y - 20)
-      ctx.arc(x + 140, y - 20, 3, 0, 2 * Math.PI)
-      ctx.moveTo(x- 40, y - 20)
-      ctx.arc(x- 40, y - 20, 3, 0, 2 * Math.PI)
+      ctx.lineTo(x - 35, y - 15);
+      ctx.moveTo(x + 80, y)
+      ctx.lineTo(x + 115, y - 15);
+      ctx.moveTo(x + 115, y - 15)
+      ctx.arc(x + 115, y - 15, 2, 0, 2 * Math.PI)
+      ctx.moveTo(x- 35, y - 15)
+      ctx.arc(x- 35, y - 15, 2, 0, 2 * Math.PI)
       ctx.closePath();
-      ctx.lineWidth = 1.5;
+      ctx.lineWidth = 1;
       ctx.strokeStyle = 'orange'
       ctx.fillStyle = 'orange'
       ctx.fill()
@@ -102,11 +102,11 @@ export const UFO = (props) => {
 
     function drawAntennaCircle(x, y, colour) {
       ctx.beginPath();
-      ctx.arc(x + 140, y - 20, 3, 0, 2 * Math.PI)
-      ctx.moveTo(x- 40, y - 20)
-      ctx.arc(x- 40, y - 20, 3, 0, 2 * Math.PI)
+      ctx.arc(x + 115, y - 15, 2.7, 0, 2 * Math.PI)
+      ctx.moveTo(x- 35, y - 15)
+      ctx.arc(x- 35, y - 15, 2.7, 0, 2 * Math.PI)
       ctx.closePath();
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.2;
       ctx.strokeStyle = colour
       ctx.fillStyle = colour
       ctx.fill()
@@ -115,7 +115,7 @@ export const UFO = (props) => {
 
     function drawBodyCircle(x, y, lineColour, fillColour) {
       ctx.beginPath();
-      ctx.arc(x, y, 3, 0, 2 * Math.PI)
+      ctx.arc(x, y, 2.7, 0, 2 * Math.PI)
       ctx.closePath();
       ctx.lineWidth = 1.5;
       ctx.strokeStyle = lineColour
@@ -125,11 +125,11 @@ export const UFO = (props) => {
     }
 
     function drawBodyCircles(x, y, fillColour) {
-      let xAxisCircle = xAxis - 185
+      let xAxisCircle = xAxis - 170
 
-      while (xAxisCircle <= xAxis - 10) {
-        drawBodyCircle(xAxisCircle, yAxis - 126, 'orange', fillColour)
-        xAxisCircle += 12
+      while (xAxisCircle <= xAxis - 30) {
+        drawBodyCircle(xAxisCircle, yAxis - 160.5, 'orange', fillColour)
+        xAxisCircle += 10
       }
     };
 

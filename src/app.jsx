@@ -5,7 +5,7 @@ import "./app.css"
 export const App = () => {
     return <div>
         <h2> Click in the box where you want to land! </h2>
-        <UFO xAxis={210} yAxis={190} />
+        <UFO xAxis={205} yAxis={220} />
     </div>
 }
 
