@@ -13,7 +13,7 @@ export const UFO = (props) => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
 
-    let { xAxis, yAxis } = props
+    let { xAxis, yAxis, speed } = props
 
     let requestId;
 
@@ -25,28 +25,32 @@ export const UFO = (props) => {
       drawBackground()
       drawUFO(xAxis - 60, yAxis - 175)
 
+
+      // LANDING
+      let yDistance = finalPosition.y - yAxis
+      let xDistance = finalPosition.x - xAxis
+
       if (yAxis < finalPosition.y) {
-        yAxis += ySpeed(xAxis, yAxis, finalPosition.x, finalPosition.y)
-        // yAxis += ((finalPosition.y - yAxis) / ((finalPosition.x - xAxis) / 4)) ;
-      }
+        yAxis += ySpeed(xDistance, yDistance)
+      } 
 
       if (xAxis < finalPosition.x) {
-        xAxis += xSpeed(xAxis, yAxis, finalPosition.x, finalPosition.y);
-      }
+        xAxis += xSpeed(xDistance, yDistance);
+      } 
 
-      function ySpeed(x, y, xFinal, yFinal) {
-        if (xFinal - x >= yFinal - y) {
-          return ((yFinal - y) / ((xFinal - x) / 4))
+      function ySpeed(xDistance, yDistance) {
+        if (xDistance >= yDistance) {
+          return ((yDistance) / ((xDistance) / speed))
         } else {
-          return 4
+          return speed
         }
       };
 
-      function xSpeed(x, y, xFinal, yFinal) {
-        if (yFinal - y > xFinal - x) {
-          return ((xFinal - x) / ((yFinal - y) / 4))
+      function xSpeed(xDistance, yDistance) {
+        if (yDistance > xDistance) {
+          return ((xDistance) / ((yDistance) / speed))
         } else {
-          return 4
+          return speed
         }
       };
 
