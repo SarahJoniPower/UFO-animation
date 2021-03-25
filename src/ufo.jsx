@@ -35,7 +35,7 @@ export const UFO = (props) => {
       drawPlant(220, 450, 'purple', 'purple', 2)
       drawPlant(180, 470, 'purple', 'purple', 2)
 
-      // LANDING
+      // FLYING
       let yDistance = finalPosition.y - yAxis
       let xDistance = finalPosition.x - xAxis
 
@@ -44,15 +44,16 @@ export const UFO = (props) => {
       } 
 
       if (xAxis < finalPosition.x && landing === false) {
-        xAxis += xSpeed(xDistance, yDistance);
+        xAxis += xSpeed(xDistance, yDistance)
       } 
 
+      //  Landing
       if (yAxis < finalPosition.y && landing === true) {
-        yAxis += 0.8
+        yAxis += ySpeedLanding(xDistance, yDistance)
       }
 
       if (xAxis < finalPosition.x && landing === true) {
-        xAxis += 0.8
+        xAxis += xSpeedLanding(xDistance, yDistance);
       }
 
       CheckIfLanding(xAxis, yAxis, finalPosition.x, finalPosition.y)
@@ -71,6 +72,22 @@ export const UFO = (props) => {
           return ((xDistance) / ((yDistance) / speed))
         } else {
           return speed
+        }
+      };
+
+      function ySpeedLanding(xDistance, yDistance) {
+        if (xDistance >= yDistance) {
+          return ((yDistance) / ((xDistance) / 0.8))
+        } else {
+          return 0.8
+        }
+      };
+
+      function xSpeedLanding(xDistance, yDistance) {
+        if (yDistance > xDistance) {
+          return ((xDistance) / ((yDistance) / 0.8))
+        } else {
+          return 0.8
         }
       };
 
