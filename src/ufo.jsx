@@ -17,6 +17,8 @@ export const UFO = (props) => {
 
     let requestId;
 
+    let landed = false
+
     const render = () => {
       ctx.clearRect(0, 0, 800, 450);
 
@@ -65,6 +67,7 @@ export const UFO = (props) => {
       if (yAxis >= finalPosition.y && xAxis >= finalPosition.x) {
         drawAntennaCircle(x, y, 'pink')
         drawBodyCircles(x, y, 'white')
+        landed = true
       } else {
         drawAntennaCircle(x, y, 'red')
         drawBodyCircles(x, y, 'purple')
@@ -87,17 +90,17 @@ export const UFO = (props) => {
       ctx.beginPath();
       ctx.moveTo(x + 80, y)
       ctx.lineTo(x + 130, y + 25);
-      ctx.moveTo(x, y)
-      ctx.lineTo(x - 50, y + 25);
-      ctx.moveTo(x - 50, y + 25)
-      ctx.lineTo(x + 130, y + 25);
-    
-      ctx.closePath();
+      ctx.lineTo(x - 50, y + 25)
+      ctx.lineTo(x, y)
+      ctx.lineTo(x + 80, y)
       ctx.lineWidth = 3;
       ctx.strokeStyle = 'pink'
-      ctx.fillStyle = 'pink'
-      ctx.fill()
       ctx.stroke();
+
+      if (landed === true) {
+      ctx.fillStyle = 'orange'
+      ctx.fill()
+      }
     };
 
     function drawAntenna(x, y) {
