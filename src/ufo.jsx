@@ -44,8 +44,6 @@ export const UFO = (props) => {
       drawPlant(801, 430, 'green', 'purple', 4, 2.5)
       drawPlant(700, 465, 'green', 'blue', 5, 2)
 
-      drawPlant(801, 340, 'blue', 'purple', 4, 2)
-      drawPlant(801, 300, 'blue', 'purple', 4, 2)
       drawPlant(801, 80, 'blue', 'yellow', 4, 2)
 
       // FLYING
