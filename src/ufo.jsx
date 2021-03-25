@@ -23,7 +23,7 @@ export const UFO = (props) => {
       ctx.clearRect(0, 0, 800, 450);
 
       drawBackground()
-      drawUFO(xAxis - 140, yAxis - 225)
+      drawUFO(xAxis - 60, yAxis - 175)
 
       if (yAxis < finalPosition.y) {
         yAxis += ySpeed(xAxis, yAxis, finalPosition.x, finalPosition.y)
@@ -146,10 +146,10 @@ export const UFO = (props) => {
     }
 
     function drawBodyCircles(x, y, fillColour) {
-      let xAxisCircle = xAxis - 170
+      let xAxisCircle = x - 35
 
-      while (xAxisCircle <= xAxis - 30) {
-        drawBodyCircle(xAxisCircle, yAxis - 205.5, 'orange', fillColour)
+      while (xAxisCircle <= x + 120) {
+        drawBodyCircle(xAxisCircle, y + 21, 'orange', fillColour)
         xAxisCircle += 10
       }
     };
