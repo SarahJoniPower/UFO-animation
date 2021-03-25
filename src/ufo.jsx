@@ -25,15 +25,28 @@ export const UFO = (props) => {
 
       drawBackground()
 
-      drawPlant(420, 400, 'purple', 'purple', 2)
-      drawPlant(600, 350, 'purple', 'yellow', 3)
+      drawPlant(420, 400, 'purple', 'purple', 2, 1.5)
+      drawPlant(600, 350, 'purple', 'yellow', 3, 1.5)
+      drawPlant(680, 270, 'purple', 'purple', 2, 1.5)
+      drawPlant(620, 250, 'purple', 'yellow', 2, 1.5)
+      drawPlant(780, 170, 'green', 'red', 2, 1.5)
+      drawPlant(720, 100, 'purple', 'yellow', 2, 1.5)
 
-      drawUFO(xAxis - 60, yAxis - 175)
+      drawUFO(xAxis - 345, yAxis - 125)
 
-      drawPlant(500, 450, 'purple', 'green', 5)
-      drawPlant(400, 450, 'purple', 'blue', 4)
-      drawPlant(220, 450, 'purple', 'purple', 2)
-      drawPlant(180, 470, 'purple', 'purple', 2)
+      drawPlant(500, 450, 'purple', 'green', 5, 2)
+      drawPlant(400, 450, 'purple', 'blue', 4, 2)
+      drawPlant(220, 450, 'purple', 'purple', 2, 1.5)
+      drawPlant(180, 470, 'purple', 'purple', 2, 1.5)
+      drawPlant(100, 470, 'green', 'red', 2, 1.5)
+
+      drawPlant(750, 460, 'green', 'blue', 4, 2.5)
+      drawPlant(801, 430, 'green', 'purple', 4, 2.5)
+      drawPlant(700, 465, 'green', 'blue', 5, 2)
+
+      drawPlant(801, 340, 'blue', 'purple', 4, 2)
+      drawPlant(801, 300, 'blue', 'purple', 4, 2)
+      drawPlant(801, 80, 'blue', 'yellow', 4, 2)
 
       // FLYING
       let yDistance = finalPosition.y - yAxis
@@ -239,13 +252,6 @@ export const UFO = (props) => {
       drawPlanet(200, 230, 24)
       drawPlanet(650, 30, 17)
       drawGround(800, 450)
-
-      // drawPlant(600, 350, 'purple', 'yellow', 3)
-      // drawPlant(500, 450, 'purple', 'green', 5)
-      // drawPlant(400, 450, 'purple', 'blue', 4)
-      // drawPlant(420, 400, 'purple', 'purple', 2)
-      // drawPlant(220, 450, 'purple', 'purple', 2)
-      // drawPlant(180, 470, 'purple', 'purple', 2)
     };
 
     function drawSky(x, y) {
@@ -272,7 +278,7 @@ export const UFO = (props) => {
       ctx.stroke();
     };
 
-    function drawPlant(x, y, lineColour, fillColour, leafRadius) {
+    function drawPlant(x, y, lineColour, fillColour, leafRadius, stemWidth) {
       ctx.beginPath();
       ctx.moveTo(x, y)
       ctx.lineTo(x, y - 45)
@@ -298,7 +304,7 @@ export const UFO = (props) => {
       ctx.arc(x + 22, y - 30, leafRadius, 0, 2 * Math.PI)
       ctx.strokeStyle = lineColour
       ctx.fillStyle = fillColour
-      ctx.lineWidth = 1;
+      ctx.lineWidth = stemWidth;
       ctx.stroke();
       ctx.fill()
     };
