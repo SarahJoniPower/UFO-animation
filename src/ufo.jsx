@@ -125,6 +125,10 @@ export const UFO = (props) => {
         drawAntennaCircle(x, y, 'red')
         drawBodyCircles(x, y, 'purple')
       }
+
+      if (landing === true) {
+        drawLandingLights(x, y)
+      }
     };
 
     function drawTop(x, y) {
@@ -149,11 +153,8 @@ export const UFO = (props) => {
       ctx.lineWidth = 3;
       ctx.strokeStyle = 'pink'
       ctx.stroke();
-
-      if (landed === true) {
       ctx.fillStyle = 'orange'
       ctx.fill()
-      }
     };
 
     function drawAntenna(x, y) {
@@ -205,6 +206,20 @@ export const UFO = (props) => {
         drawBodyCircle(xAxisCircle, y + 21, 'orange', fillColour)
         xAxisCircle += 10
       }
+    };
+
+    function drawLandingLights(x, y) {
+      ctx.beginPath();
+      ctx.moveTo(x + 120, y + 25)
+      ctx.lineTo(x + 135, y + 35);
+      ctx.lineTo(x - 55, y + 35)
+      ctx.lineTo(x - 40, y + 25)
+      ctx.lineTo(x + 120, y + 25)
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(243, 243, 243, 0.288)';
+      ctx.fillStyle = 'rgba(243, 243, 243, 0.388)';
+      ctx.stroke();
+      ctx.fill();
     };
 
     function drawBackground() {
