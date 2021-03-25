@@ -18,34 +18,45 @@ export const UFO = (props) => {
     let requestId;
 
     let landed = false
+    let landing = false 
 
     const render = () => {
       ctx.clearRect(0, 0, 800, 450);
 
       drawBackground()
+
       drawPlant(420, 400, 'purple', 'purple', 2)
       drawPlant(600, 350, 'purple', 'yellow', 3)
+
       drawUFO(xAxis - 60, yAxis - 175)
+
       drawPlant(500, 450, 'purple', 'green', 5)
       drawPlant(400, 450, 'purple', 'blue', 4)
       drawPlant(220, 450, 'purple', 'purple', 2)
       drawPlant(180, 470, 'purple', 'purple', 2)
 
-
       // LANDING
       let yDistance = finalPosition.y - yAxis
       let xDistance = finalPosition.x - xAxis
 
-      if (yAxis < finalPosition.y) {
+      if (yAxis < finalPosition.y && landing === false) {
         yAxis += ySpeed(xDistance, yDistance)
       } 
 
-      if (xAxis < finalPosition.x) {
+      if (xAxis < finalPosition.x && landing === false) {
         xAxis += xSpeed(xDistance, yDistance);
       } 
 
-      CheckIfLanded(xAxis, yAxis, finalPosition.x, finalPosition.y)
+      if (yAxis < finalPosition.y && landing === true) {
+        yAxis += 0.8
+      }
 
+      if (xAxis < finalPosition.x && landing === true) {
+        xAxis += 0.8
+      }
+
+      CheckIfLanding(xAxis, yAxis, finalPosition.x, finalPosition.y)
+      CheckIfLanded(xAxis, yAxis, finalPosition.x, finalPosition.y)
 
       function ySpeed(xDistance, yDistance) {
         if (xDistance >= yDistance) {
@@ -63,9 +74,16 @@ export const UFO = (props) => {
         }
       };
 
+      function CheckIfLanding(x, y, xFinal, yFinal) {
+        if (x > xFinal * 0.9 && y > yFinal * 0.9 && landed === false ) {
+          landing = true
+        }
+      };
+
       function CheckIfLanded(x, y, xFinal, yFinal) {
         if (x >= xFinal && y >= yFinal) {
         landed = true
+        landing = false
         }
       };
 
