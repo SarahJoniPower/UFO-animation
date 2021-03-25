@@ -38,6 +38,9 @@ export const UFO = (props) => {
         xAxis += xSpeed(xDistance, yDistance);
       } 
 
+      CheckIfLanded(xAxis, yAxis, finalPosition.x, finalPosition.y)
+
+
       function ySpeed(xDistance, yDistance) {
         if (xDistance >= yDistance) {
           return ((yDistance) / ((xDistance) / speed))
@@ -51,6 +54,12 @@ export const UFO = (props) => {
           return ((xDistance) / ((yDistance) / speed))
         } else {
           return speed
+        }
+      };
+
+      function CheckIfLanded(x, y, xFinal, yFinal) {
+        if (x >= xFinal && y >= yFinal) {
+        landed = true
         }
       };
 
@@ -68,10 +77,9 @@ export const UFO = (props) => {
       drawBottom(x, y)
       drawAntenna(x, y)
 
-      if (yAxis >= finalPosition.y && xAxis >= finalPosition.x) {
+      if (landed === true) {
         drawAntennaCircle(x, y, 'pink')
         drawBodyCircles(x, y, 'white')
-        landed = true
       } else {
         drawAntennaCircle(x, y, 'red')
         drawBodyCircles(x, y, 'purple')
