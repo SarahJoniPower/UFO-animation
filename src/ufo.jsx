@@ -13,40 +13,94 @@ export const UFO = (props) => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
 
-    let { xAxis, yAxis } = props
+    let { xAxis, yAxis, speed } = props
 
     let requestId;
 
     let landed = false
+    let landing = false 
 
     const render = () => {
       ctx.clearRect(0, 0, 800, 450);
 
       drawBackground()
+
+      drawPlant(420, 400, 'purple', 'purple', 2)
+      drawPlant(600, 350, 'purple', 'yellow', 3)
+
       drawUFO(xAxis - 60, yAxis - 175)
 
-      if (yAxis < finalPosition.y) {
-        yAxis += ySpeed(xAxis, yAxis, finalPosition.x, finalPosition.y)
-        // yAxis += ((finalPosition.y - yAxis) / ((finalPosition.x - xAxis) / 4)) ;
+      drawPlant(500, 450, 'purple', 'green', 5)
+      drawPlant(400, 450, 'purple', 'blue', 4)
+      drawPlant(220, 450, 'purple', 'purple', 2)
+      drawPlant(180, 470, 'purple', 'purple', 2)
+
+      // FLYING
+      let yDistance = finalPosition.y - yAxis
+      let xDistance = finalPosition.x - xAxis
+
+      if (yAxis < finalPosition.y && landing === false) {
+        yAxis += ySpeed(xDistance, yDistance)
+      } 
+
+      if (xAxis < finalPosition.x && landing === false) {
+        xAxis += xSpeed(xDistance, yDistance)
+      } 
+
+      //  Landing
+      if (yAxis < finalPosition.y && landing === true) {
+        yAxis += ySpeedLanding(xDistance, yDistance)
       }
 
-      if (xAxis < finalPosition.x) {
-        xAxis += xSpeed(xAxis, yAxis, finalPosition.x, finalPosition.y);
+      if (xAxis < finalPosition.x && landing === true) {
+        xAxis += xSpeedLanding(xDistance, yDistance);
       }
 
-      function ySpeed(x, y, xFinal, yFinal) {
-        if (xFinal - x >= yFinal - y) {
-          return ((yFinal - y) / ((xFinal - x) / 4))
+      CheckIfLanding(xAxis, yAxis, finalPosition.x, finalPosition.y)
+      CheckIfLanded(xAxis, yAxis, finalPosition.x, finalPosition.y)
+
+      function ySpeed(xDistance, yDistance) {
+        if (xDistance >= yDistance) {
+          return ((yDistance) / ((xDistance) / speed))
         } else {
-          return 4
+          return speed
         }
       };
 
-      function xSpeed(x, y, xFinal, yFinal) {
-        if (yFinal - y > xFinal - x) {
-          return ((xFinal - x) / ((yFinal - y) / 4))
+      function xSpeed(xDistance, yDistance) {
+        if (yDistance > xDistance) {
+          return ((xDistance) / ((yDistance) / speed))
         } else {
-          return 4
+          return speed
+        }
+      };
+
+      function ySpeedLanding(xDistance, yDistance) {
+        if (xDistance >= yDistance) {
+          return ((yDistance) / ((xDistance) / 0.8))
+        } else {
+          return 0.8
+        }
+      };
+
+      function xSpeedLanding(xDistance, yDistance) {
+        if (yDistance > xDistance) {
+          return ((xDistance) / ((yDistance) / 0.8))
+        } else {
+          return 0.8
+        }
+      };
+
+      function CheckIfLanding(x, y, xFinal, yFinal) {
+        if (x > xFinal * 0.9 && y > yFinal * 0.9 && landed === false ) {
+          landing = true
+        }
+      };
+
+      function CheckIfLanded(x, y, xFinal, yFinal) {
+        if (x >= xFinal && y >= yFinal) {
+        landed = true
+        landing = false
         }
       };
 
@@ -64,10 +118,9 @@ export const UFO = (props) => {
       drawBottom(x, y)
       drawAntenna(x, y)
 
-      if (yAxis >= finalPosition.y && xAxis >= finalPosition.x) {
+      if (landed === true) {
         drawAntennaCircle(x, y, 'pink')
         drawBodyCircles(x, y, 'white')
-        landed = true
       } else {
         drawAntennaCircle(x, y, 'red')
         drawBodyCircles(x, y, 'purple')
@@ -172,12 +225,12 @@ export const UFO = (props) => {
       drawPlanet(650, 30, 17)
       drawGround(800, 450)
 
-      drawPlant(600, 350, 'purple', 'yellow', 3)
-      drawPlant(500, 450, 'purple', 'green', 5)
-      drawPlant(400, 450, 'purple', 'blue', 4)
-      drawPlant(420, 400, 'purple', 'purple', 2)
-      drawPlant(220, 450, 'purple', 'purple', 2)
-      drawPlant(180, 470, 'purple', 'purple', 2)
+      // drawPlant(600, 350, 'purple', 'yellow', 3)
+      // drawPlant(500, 450, 'purple', 'green', 5)
+      // drawPlant(400, 450, 'purple', 'blue', 4)
+      // drawPlant(420, 400, 'purple', 'purple', 2)
+      // drawPlant(220, 450, 'purple', 'purple', 2)
+      // drawPlant(180, 470, 'purple', 'purple', 2)
     };
 
     function drawSky(x, y) {
