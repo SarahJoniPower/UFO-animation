@@ -23,7 +23,13 @@ export const UFO = (props) => {
       ctx.clearRect(0, 0, 800, 450);
 
       drawBackground()
+      drawPlant(420, 400, 'purple', 'purple', 2)
+      drawPlant(600, 350, 'purple', 'yellow', 3)
       drawUFO(xAxis - 60, yAxis - 175)
+      drawPlant(500, 450, 'purple', 'green', 5)
+      drawPlant(400, 450, 'purple', 'blue', 4)
+      drawPlant(220, 450, 'purple', 'purple', 2)
+      drawPlant(180, 470, 'purple', 'purple', 2)
 
 
       // LANDING
@@ -184,12 +190,12 @@ export const UFO = (props) => {
       drawPlanet(650, 30, 17)
       drawGround(800, 450)
 
-      drawPlant(600, 350, 'purple', 'yellow', 3)
-      drawPlant(500, 450, 'purple', 'green', 5)
-      drawPlant(400, 450, 'purple', 'blue', 4)
-      drawPlant(420, 400, 'purple', 'purple', 2)
-      drawPlant(220, 450, 'purple', 'purple', 2)
-      drawPlant(180, 470, 'purple', 'purple', 2)
+      // drawPlant(600, 350, 'purple', 'yellow', 3)
+      // drawPlant(500, 450, 'purple', 'green', 5)
+      // drawPlant(400, 450, 'purple', 'blue', 4)
+      // drawPlant(420, 400, 'purple', 'purple', 2)
+      // drawPlant(220, 450, 'purple', 'purple', 2)
+      // drawPlant(180, 470, 'purple', 'purple', 2)
     };
 
     function drawSky(x, y) {
