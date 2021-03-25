@@ -4,7 +4,7 @@ export const UFO = (props) => {
   const canvasRef = useRef(null)
 
   let [finalPosition, setFinalPosition] = useState({ x: props.xAxis, y: props.yAxis })
-
+  
   // let array = [1, 2, 3] 
   // let a = array[0] 
   // let [a, b] = array
@@ -18,7 +18,7 @@ export const UFO = (props) => {
     let requestId;
 
     let landed = false
-    let landing = false 
+    let landing = false
 
     const render = () => {
       ctx.clearRect(0, 0, 800, 450);
@@ -386,4 +386,4 @@ export const UFO = (props) => {
     ref={canvasRef}
     onClick={(event) => { setFinalPosition({ x: event.clientX, y: event.clientY }) }}
   />
-}
+};
