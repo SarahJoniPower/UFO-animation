@@ -1,16 +1,21 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path")
+
 module.exports = {
-    entry: path.resolve(__dirname, "src", "index.js"),
+    entry: path.resolve(__dirname, "src", "index.tsx"),
     module: {
         rules: [{
-            test: /\.(jsx|js)$/, exclude: /node_modules/, use: [{
+            test: /\.[jt]sx?$/, exclude: /node_modules/, use: [{
                 loader: "babel-loader", options: {
                     presets: [
                         ['@babel/preset-env', {
                             "targets": "defaults"
                         }],
-                        '@babel/preset-react'
+                        '@babel/preset-react',
+                        ['@babel/preset-typescript', {
+                            "isTSX": true,
+                            "allExtensions": true
+                        }],
                     ]
                 }
             }]
@@ -24,7 +29,7 @@ module.exports = {
     },
     plugins: [new HtmlWebpackPlugin()],
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
