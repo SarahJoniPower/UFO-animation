@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react"
 
-export const UFO = (props) => {
+export const UFO = ({xAxis, yAxis, speed}) => {
   const canvasRef = useRef(null)
 
-  let [finalPosition, setFinalPosition] = useState({ x: props.xAxis, y: props.yAxis })
+  let [finalPosition, setFinalPosition] = useState({ x: xAxis, y: yAxis })
   
   // let array = [1, 2, 3] 
   // let a = array[0] 
@@ -13,17 +13,19 @@ export const UFO = (props) => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
 
-    let { xAxis, yAxis, speed } = props
-
     let requestId;
 
     let landed = false
     let landing = false
 
+    let colour = 'blue'
+
     const render = () => {
       ctx.clearRect(0, 0, 800, 450);
 
-      drawBackground()
+      drawBackground(colour)
+
+      // setInterval(starsTwinkle, 10000)
 
       drawPlant(420, 400, 'purple', 'purple', 2, 1.5)
       drawPlant(600, 350, 'purple', 'yellow', 3, 1.5)
@@ -233,24 +235,36 @@ export const UFO = (props) => {
       ctx.fill();
     };
 
-    function drawBackground() {
+    function drawBackground(colour) {
       drawSky(800, 450)
       drawBigDipper(250, 120)
       drawCancer(470, 20)
-      drawThreeStars(400, 100)
-      drawThreeStars(300, 20)
-      drawThreeStars(100, 300)
-      drawThreeStars(50, 200)
-      drawThreeStars(600, 100)
-      drawThreeStars(500, 70)
-      drawThreeStars(10, 10)
-      drawThreeStars(50, 50)
-      drawThreeStars(450, 210)
-      drawPlanet(205, 55, 27)
-      drawPlanet(200, 230, 24)
-      drawPlanet(650, 30, 17)
-      drawGround(800, 450)
+
+      drawThreeStars(400, 100, colour)
+      drawThreeStars(300, 20, colour)
+      drawThreeStars(100, 300, 'blue')
+      drawThreeStars(50, 200, 'blue')
+      drawThreeStars(600, 100, 'blue')
+      drawThreeStars(500, 70, 'blue')
+      drawThreeStars(10, 10, 'blue')
+      drawThreeStars(50, 50, 'blue')
+      drawThreeStars(450, 210, 'blue')
+      drawPlanet(205, 55, 27, colour)
+      drawPlanet(200, 230, 24, colour)
+      drawPlanet(650, 30, 17, 'silver')
+      drawGround(800, 450) 
     };
+
+    function starsTwinkle() {
+       
+      if (colour === 'blue') {
+        colour = 'silver'
+      } else if (colour === 'silver') {
+        colour = 'blue'
+      }
+    };
+
+    setInterval(starsTwinkle(), 1000)
 
     function drawSky(x, y) {
       ctx.beginPath();
@@ -307,7 +321,7 @@ export const UFO = (props) => {
       ctx.fill()
     };
 
-    function drawPlanet(x, y, radius) {
+    function drawPlanet(x, y, radius, colour) {
       ctx.beginPath()
       ctx.arc(x, y, radius, 0, 2 * Math.PI)
       ctx.moveTo(x - 40, y + 10)
@@ -316,12 +330,12 @@ export const UFO = (props) => {
       ctx.lineTo(x - radius, y - 1)
       ctx.moveTo(x + 40, y - 10)
       ctx.lineTo(x + radius, y - 10)
-      ctx.strokeStyle = 'blue'
+      ctx.strokeStyle = colour
       ctx.lineWidth = 1;
       ctx.stroke();
     };
 
-    function drawThreeStars(x, y) {
+    function drawThreeStars(x, y, colour) {
       ctx.beginPath()
       ctx.arc(x, y, 1.5, 0, 2 * Math.PI)
       ctx.moveTo(x + 30, y + 20)
@@ -329,8 +343,8 @@ export const UFO = (props) => {
       ctx.moveTo(x + 40, y - 20)
       ctx.arc(x + 40, y - 20, 1.5, 0, 2 * Math.PI)
       ctx.lineWidth = 1;
-      ctx.strokeStyle = 'blue'
-      ctx.fillStyle = 'blue'
+      ctx.strokeStyle = colour
+      ctx.fillStyle = colour
       ctx.fill()
       ctx.stroke();
     };
