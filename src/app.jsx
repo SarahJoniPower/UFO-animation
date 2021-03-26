@@ -7,7 +7,6 @@ export const App = () => {
 let [speed, setSpeed] = useState( 5 )
 
     return <body>
-        <title> UFO Landing </title>
         <h2> Land a UFO! </h2>
         <h3> Pick a speed, then click in the box where you want to land. 
         </h3>
