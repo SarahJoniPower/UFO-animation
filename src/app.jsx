@@ -18,7 +18,7 @@ let [speed, setSpeed] = useState( 5 )
         <button id="Re-LandBtn" onClick={() => window.location.reload()}>Re-Land</button>
         </div>
         <div id="canvas">
-        <UFO xAxis={400} yAxis={165} speed={speed} />
+        <UFO xAxis={102} yAxis={60} speed={speed} />
         </div>
     </body>
 }

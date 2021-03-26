@@ -34,7 +34,7 @@ export const UFO = ({xAxis, yAxis, speed}) => {
       drawPlant(780, 170, 'green', 'red', 2, 1.5)
       drawPlant(720, 100, 'purple', 'yellow', 2, 1.5)
 
-      drawUFO(xAxis - 345, yAxis - 125)
+      drawUFO(xAxis - 43, yAxis - 20)
 
       drawPlant(500, 450, 'purple', 'green', 5, 2)
       drawPlant(400, 450, 'purple', 'blue', 4, 2)
@@ -402,6 +402,9 @@ export const UFO = ({xAxis, yAxis, speed}) => {
     width="800px"
     height="450px"
     ref={canvasRef}
-    onClick={(event) => { setFinalPosition({ x: event.clientX, y: event.clientY }) }}
+    onClick={(event) => {
+      const rectangle = event.target.getBoundingClientRect()
+       setFinalPosition({ x: event.clientX - rectangle.left, y: event.clientY - rectangle.top }) 
+      }}
   />
 };
