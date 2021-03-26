@@ -21,3 +21,19 @@ div {
   display: block;
   width: 800px;
 }
+
+#fastBtn {
+  background-color: rgb(83, 80, 255);
+}
+
+#RegularBtn {
+  background-color: rgb(33, 33, 228);
+}
+
+#RelaxoBtn {
+  background-color: deeppink;
+}
+
+#Re-LandBtn {
+  background-color: gold;
+}
