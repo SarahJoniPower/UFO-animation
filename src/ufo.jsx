@@ -251,7 +251,7 @@ export const UFO = ({xAxis, yAxis, speed}) => {
       drawThreeStars(450, 210, 'blue')
       drawPlanet(205, 55, 27, colour)
       drawPlanet(200, 230, 24, colour)
-      drawPlanet(650, 30, 17, 'silver')
+      drawPlanet(650, 30, 17, 'blue')
       drawGround(800, 450) 
     };
 
