@@ -2,6 +2,8 @@
 
 An interactive animation of a UFO landing. 
 
+Deployed: https://ufo-landing.herokuapp.com/
+
 Project must include: 
 A sky
 A ground
