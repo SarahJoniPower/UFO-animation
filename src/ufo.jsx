@@ -1,9 +1,27 @@
 import React, { useRef, useEffect, useState } from "react"
 
-export const UFO = ({xAxis, yAxis, speed}) => {
+class PureCanvas extends React.Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+
+  render() {
+    return (
+      <canvas
+        width="800"
+        height="450"
+        ref={node =>
+          node ? this.props.contextRef(node.getContext('2d')) : null
+        }
+      />
+    );
+  }
+}
+
+export const UFO = ({xAxis, yAxis, landed, landing, starColour}) => {
   const canvasRef = useRef(null)
 
-  let [finalPosition, setFinalPosition] = useState({ x: xAxis, y: yAxis })
+  // let [finalPosition, setFinalPosition] = useState({ x: xAxis, y: yAxis })
   
   // let array = [1, 2, 3] 
   // let a = array[0] 
@@ -13,19 +31,9 @@ export const UFO = ({xAxis, yAxis, speed}) => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext("2d");
 
-    let requestId;
-
-    let landed = false
-    let landing = false
-
-    let colour = 'blue'
-
-    const render = () => {
       ctx.clearRect(0, 0, 800, 450);
 
-      drawBackground(colour)
-
-      // setInterval(starsTwinkle, 10000)
+      drawBackground(starColour)
 
       drawPlant(420, 400, 'purple', 'purple', 2, 1.5)
       drawPlant(600, 350, 'purple', 'yellow', 3, 1.5)
@@ -48,83 +56,6 @@ export const UFO = ({xAxis, yAxis, speed}) => {
 
       drawPlant(801, 80, 'blue', 'yellow', 4, 2)
 
-      // FLYING
-      let yDistance = finalPosition.y - yAxis
-      let xDistance = finalPosition.x - xAxis
-
-      if (yAxis < finalPosition.y && landing === false) {
-        yAxis += ySpeed(xDistance, yDistance)
-      } 
-
-      if (xAxis < finalPosition.x && landing === false) {
-        xAxis += xSpeed(xDistance, yDistance)
-      } 
-
-      //  Landing
-      if (yAxis < finalPosition.y && landing === true) {
-        yAxis += ySpeedLanding(xDistance, yDistance)
-      }
-
-      if (xAxis < finalPosition.x && landing === true) {
-        xAxis += xSpeedLanding(xDistance, yDistance);
-      }
-
-      CheckIfLanding(xAxis, yAxis, finalPosition.x, finalPosition.y)
-      CheckIfLanded(xAxis, yAxis, finalPosition.x, finalPosition.y)
-
-      function ySpeed(xDistance, yDistance) {
-        if (xDistance >= yDistance) {
-          return ((yDistance) / ((xDistance) / speed))
-        } else {
-          return speed
-        }
-      };
-
-      function xSpeed(xDistance, yDistance) {
-        if (yDistance > xDistance) {
-          return ((xDistance) / ((yDistance) / speed))
-        } else {
-          return speed
-        }
-      };
-
-      function ySpeedLanding(xDistance, yDistance) {
-        if (xDistance >= yDistance) {
-          return ((yDistance) / ((xDistance) / 0.8))
-        } else {
-          return 0.8
-        }
-      };
-
-      function xSpeedLanding(xDistance, yDistance) {
-        if (yDistance > xDistance) {
-          return ((xDistance) / ((yDistance) / 0.8))
-        } else {
-          return 0.8
-        }
-      };
-
-      function CheckIfLanding(x, y, xFinal, yFinal) {
-        if (x > xFinal * 0.9 && y > yFinal * 0.9 && landed === false ) {
-          landing = true
-        }
-      };
-
-      function CheckIfLanded(x, y, xFinal, yFinal) {
-        if (x >= xFinal && y >= yFinal) {
-        landed = true
-        landing = false
-        }
-      };
-
-      requestId = requestAnimationFrame(render)
-    }
-
-    render()
-
-    return () => {
-      cancelAnimationFrame(requestId)
-    }
 
     function drawUFO(x, y) {
       drawTop(x, y)
@@ -254,17 +185,6 @@ export const UFO = ({xAxis, yAxis, speed}) => {
       drawPlanet(650, 30, 17, 'blue')
       drawGround(800, 450) 
     };
-
-    function starsTwinkle() {
-       
-      if (colour === 'blue') {
-        colour = 'silver'
-      } else if (colour === 'silver') {
-        colour = 'blue'
-      }
-    };
-
-    setInterval(starsTwinkle(), 1000)
 
     function drawSky(x, y) {
       ctx.beginPath();
